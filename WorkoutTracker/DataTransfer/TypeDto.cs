@@ -1,7 +1,14 @@
-﻿namespace WorkoutTracker.DataTransfer
+﻿using System.Xml.Serialization;
+
+namespace WorkoutTracker.DataTransfer
 {
-    public class TypeDto
+    [XmlType("TypeDto")]
+    public class TypeDto : IBaseDto
     {
+        [XmlElement("Id")]
+        public int Id { get; set; }
+
+        [XmlElement("Name")]
         public string Name { get; set; }
 
         public CategoryDto Category { get; set; }

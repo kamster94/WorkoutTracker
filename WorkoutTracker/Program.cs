@@ -14,7 +14,9 @@ namespace WorkoutTracker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            var mainWindow = new MainWindow();
+            Application.Run(mainWindow);
+            
         }
     }
 }
