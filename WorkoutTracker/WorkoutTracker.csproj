@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\CsvDao.cs" />
     <Compile Include="DataAccess\IBaseDao.cs" />
     <Compile Include="DataAccess\XmlDao.cs" />
     <Compile Include="DataTransfer\CategoryDto.cs" />

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using WorkoutTracker.DataTransfer;
 
 namespace WorkoutTracker.DataAccess
 {
@@ -30,7 +28,7 @@ namespace WorkoutTracker.DataAccess
 
         public void SerializeToFile<T>(string path, T obj)
         {
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(List<DateDto>));
+            XmlSerializer xsSubmit = new XmlSerializer(typeof(T));
             string xml;
             var document = new XmlDocument();
 

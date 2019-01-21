@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace WorkoutTracker.DataTransfer
 {
-    [XmlType("DateDto")]
+    [XmlType("WorkoutDate")]
     public class DateDto : IBaseDto
     {
         [XmlElement("Date")]

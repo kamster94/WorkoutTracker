@@ -1,8 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace WorkoutTracker.DataTransfer
 {
-    [XmlType("CategoryDto")]
+    [XmlType("Category")]
     public class CategoryDto : IBaseDto
     {
         [XmlElement("Id")]
@@ -10,5 +11,7 @@ namespace WorkoutTracker.DataTransfer
 
         [XmlElement("Name")]
         public string Name { get; set; }
+
+        public List<TypeDto> Types { get; set; }
     }
 }
