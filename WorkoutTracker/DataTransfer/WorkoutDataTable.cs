@@ -10,6 +10,14 @@ namespace WorkoutTracker.DataTransfer
     {
         private readonly string _DateColumnName = "Date";
 
+        public string DateColumnName
+        {
+            get
+            {
+                return _DateColumnName;
+            }
+        }
+
         public void FillWithDto(IList<DateDto> dates, IList<CategoryDto> categories)
         {
             this.Columns.Add(new DataColumn(_DateColumnName, typeof(string)));
@@ -25,9 +33,9 @@ namespace WorkoutTracker.DataTransfer
             {
                 object[] values = new object[this.Columns.Count];
                 values[0] = date.Date.ToShortDateString();
-                for (int i = 1; i < this.Columns.Count-1; i++)
+                for (int i = 1; i < this.Columns.Count; i++)
                 {
-                    values[i] = date.Workouts[i].Count;
+                    values[i] = date.Workouts[i-1].Count;
                 }
 
                 this.Rows.Add(values);
@@ -46,7 +54,8 @@ namespace WorkoutTracker.DataTransfer
                 {
                     if (column.ColumnName == _DateColumnName) continue;
                     var workout = new WorkoutDto();
-                    workout.Count = this.Rows[this.Rows.IndexOf(row)].Field<int>(this.Columns.IndexOf(column));
+                    var count = this.Rows[this.Rows.IndexOf(row)].Field<int?>(this.Columns.IndexOf(column));
+                    workout.Count = count != null ? (int) count : 0;
                     try
                     {
                         workout.CategoryId = categories.FirstOrDefault(x => x.Types.Any(a => a.Name == column.ColumnName)).Id;
