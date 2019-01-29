@@ -170,16 +170,6 @@ namespace WorkoutTracker.View
             csvDao.SerializeToFile("ttt.csv", _dataTable);
         }
 
-        private void buttoncat_Click(object sender, EventArgs e)
-        {
-            AddCategory("tesdt");
-        }
-
-        private void buttontype_Click(object sender, EventArgs e)
-        {
-            AddType("yyy", 1);
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             CsvDao csvDao = new CsvDao();

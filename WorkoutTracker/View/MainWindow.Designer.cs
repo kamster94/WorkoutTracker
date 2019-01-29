@@ -32,14 +32,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.buttoncat = new System.Windows.Forms.Button();
-            this.buttontype = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -84,26 +82,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // buttoncat
-            // 
-            this.buttoncat.Location = new System.Drawing.Point(562, 93);
-            this.buttoncat.Name = "buttoncat";
-            this.buttoncat.Size = new System.Drawing.Size(101, 23);
-            this.buttoncat.TabIndex = 5;
-            this.buttoncat.Text = "add category";
-            this.buttoncat.UseVisualStyleBackColor = true;
-            this.buttoncat.Click += new System.EventHandler(this.buttoncat_Click);
-            // 
-            // buttontype
-            // 
-            this.buttontype.Location = new System.Drawing.Point(588, 180);
-            this.buttontype.Name = "buttontype";
-            this.buttontype.Size = new System.Drawing.Size(75, 23);
-            this.buttontype.TabIndex = 6;
-            this.buttontype.Text = "add type";
-            this.buttontype.UseVisualStyleBackColor = true;
-            this.buttontype.Click += new System.EventHandler(this.buttontype_Click);
-            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(588, 122);
@@ -120,7 +98,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 8;
-            this.button5.Text = "button5";
+            this.button5.Text = "tab2dto";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -138,13 +116,11 @@
             this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.button6);
             this.tabPage1.Controls.Add(this.dataGridView);
-            this.tabPage1.Controls.Add(this.buttontype);
             this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.buttoncat);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -152,6 +128,16 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(588, 93);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "mng cat\'n\'tp";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -162,16 +148,6 @@
             this.button6.Text = "delete";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(588, 291);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // MainWindow
             // 
@@ -194,8 +170,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button buttoncat;
-        private System.Windows.Forms.Button buttontype;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabControl tabControl1;
