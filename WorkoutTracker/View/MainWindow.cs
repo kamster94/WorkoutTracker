@@ -26,6 +26,7 @@ namespace WorkoutTracker.View
         public MainWindow()
         {
             InitializeComponent();
+            Categories = new List<CategoryDto>();
             //TestSetup();
             //Categories = new List<CategoryDto>();
             //Dates = new List<DateDto>();

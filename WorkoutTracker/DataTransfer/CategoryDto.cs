@@ -12,6 +12,9 @@ namespace WorkoutTracker.DataTransfer
         [XmlElement("Name")]
         public string Name { get; set; }
 
+        [XmlElement("Order")]
+        public int Order { get; set; }
+
         public List<TypeDto> Types { get; set; }
     }
 }
