@@ -10,6 +10,8 @@ namespace WorkoutTracker.View
     {
         private List<CategoryDto> _categories;
 
+        private BindingSource _dataBinding;
+
         public CategoriesAndTypesWindow(ref List<CategoryDto> categories)
         {
             InitializeComponent();
@@ -19,18 +21,17 @@ namespace WorkoutTracker.View
 
         private void RefreshCategoriesAndTypes()
         {
-            _categories = _categories.OrderBy(x => x.Order).ToList();
-            var dataBinding = new BindingSource();
-            dataBinding.DataSource = _categories;
-            comboBoxCategories.DataSource = dataBinding;
+            _categories.Sort((x,y) => x.Order.CompareTo(y.Order));
+            _dataBinding = new BindingSource();
+            _dataBinding.DataSource = _categories;
+            comboBoxCategories.DataSource = _dataBinding;
             comboBoxCategories.DisplayMember = "Name";
         }
 
         private void ComboBoxCategories_SelectedIndexChanged(object sender,
             System.EventArgs e)
         {
-            _categories[comboBoxCategories.SelectedIndex].Types = _categories[comboBoxCategories.SelectedIndex].Types
-                .OrderBy(x => x.Order).ToList();
+            _categories[comboBoxCategories.SelectedIndex].Types.Sort((x,y) => x.Order.CompareTo(y.Order));
             var dataBinding = new BindingSource();
             dataBinding.DataSource = _categories[comboBoxCategories.SelectedIndex].Types;
             comboBoxTypes.DataSource = dataBinding;
@@ -83,8 +84,7 @@ namespace WorkoutTracker.View
                 }
 
                 _categories[comboBoxCategories.SelectedIndex].Order = order;
-
-                _categories = _categories.OrderBy(x => x.Order).ToList();
+                
                 RefreshCategoriesAndTypes();
             }
         }
@@ -104,6 +104,7 @@ namespace WorkoutTracker.View
                     }
 
                     _categories.Remove(_categories[comboBoxCategories.SelectedIndex]);
+
                     RefreshCategoriesAndTypes();
                 }
             }
@@ -119,6 +120,7 @@ namespace WorkoutTracker.View
                 textBoxDialog.Dispose();
                 var category = _categories[comboBoxCategories.SelectedIndex];
                 var typeId = category.Types.Count > 0 ? category.Types.Max(x => x.Id) + 1 : 1;
+
                 category.Types.Add(new TypeDto
                 {
                     CategoryId = category.Id,
@@ -126,6 +128,7 @@ namespace WorkoutTracker.View
                     Order = category.Types.Count > 0 ? category.Types.Count + 1 : 1,
                     Name = name
                 });
+
                 RefreshCategoriesAndTypes();
             }
         }
@@ -159,7 +162,6 @@ namespace WorkoutTracker.View
 
                 _categories[comboBoxCategories.SelectedIndex].Types[comboBoxTypes.SelectedIndex].Order = order;
 
-                _categories[comboBoxCategories.SelectedIndex].Types = _categories[comboBoxCategories.SelectedIndex].Types.OrderBy(x => x.Order).ToList();
                 RefreshCategoriesAndTypes();
             }
         }
@@ -173,12 +175,13 @@ namespace WorkoutTracker.View
                     MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    for (int i = _categories[comboBoxCategories.SelectedIndex].Types[comboBoxTypes.SelectedIndex].Order - 1; i < _categories[comboBoxCategories.SelectedIndex].Types.Count; i++)
+                    for (int i = _categories[comboBoxCategories.SelectedIndex].Types[comboBoxTypes.SelectedIndex].Order - 1; i < _categories[comboBoxCategories.SelectedIndex].Types.Count - 1; i++)
                     {
                         _categories[i].Order--;
                     }
 
                     _categories[comboBoxCategories.SelectedIndex].Types.Remove(_categories[comboBoxCategories.SelectedIndex].Types[comboBoxTypes.SelectedIndex]);
+
                     RefreshCategoriesAndTypes();
                 }
             }
@@ -186,7 +189,7 @@ namespace WorkoutTracker.View
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
     }
 }

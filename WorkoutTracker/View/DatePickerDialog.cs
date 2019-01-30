@@ -15,7 +15,6 @@ namespace WorkoutTracker.View
         public DatePickerDialog()
         {
             InitializeComponent();
-            //if (date.Length > 0) dateTimePicker.Value = DateTime.Parse(date);
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)

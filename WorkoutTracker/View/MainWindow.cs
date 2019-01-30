@@ -27,6 +27,7 @@ namespace WorkoutTracker.View
         {
             InitializeComponent();
             Categories = new List<CategoryDto>();
+            Dates = new List<DateDto>();
             //TestSetup();
             //Categories = new List<CategoryDto>();
             //Dates = new List<DateDto>();
@@ -113,48 +114,31 @@ namespace WorkoutTracker.View
             _bindingSource = new BindingSource();
         }
 
-        public void AddCategory(string name)
+        private void buttonSaveNumericData_Click(object sender, EventArgs e)
         {
-            Categories.Add(new CategoryDto
+            IBaseDao dao;
+            var saveFileDialog = new SaveFileDialog
             {
-                Id = Categories.Count + 1,
-                Name = name,
-                Types = new List<TypeDto>()
-            });
-            Categories.OrderBy(x => x.Id);
-        }
-
-        public void AddType(string name, int categoryId)
-        {
-            var category = Categories.Find(x => x.Id == categoryId);
-            var typeId = category.Types.Count + 1;
-            category.Types.Add(new TypeDto
+                Filter = "XML|*.xml|CSV|*.csv",
+                Title = "Save numeric data"
+            };
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != "")
             {
-                CategoryId = categoryId,
-                Id = typeId,
-                Name = name
-            });
-            foreach (var date in Dates)
-            {
-                date.Workouts.Add(new WorkoutDto
+                switch (saveFileDialog.FilterIndex)
                 {
-                    CategoryId = categoryId,
-                    TypeId = typeId,
-                    Count = 0
-                });
-                date.Workouts = date.Workouts.OrderBy(x => x.CategoryId).ThenBy(x => x.TypeId).ToList();
-            }
+                    case 1:
+                        dao = new XmlDao();
+                        dao.SerializeToFile(saveFileDialog.FileName, Dates);
+                        break;
 
-            foreach (var categoryScope in Categories)
-            {
-                categoryScope.Types.OrderBy(x => x.Id);
+                    case 2:
+                        dao = new CsvDao();
+                        dao.SerializeToFile(saveFileDialog.FileName, _dataTable);
+                        break;
+                }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            XmlDao xmlDao = new XmlDao();
-            xmlDao.SerializeToFile("test45.xml", Dates);
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -167,22 +151,55 @@ namespace WorkoutTracker.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CsvDao csvDao = new CsvDao();
-            csvDao.SerializeToFile("ttt.csv", _dataTable);
+            var csvDao = new CsvDao();
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "CSV|*.csv|All files|*",
+                Title = "Save numeric data as csv"
+            };
+
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                csvDao.SerializeToFile(saveFileDialog.FileName, _dataTable);
+            }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonLoadData_Click(object sender, EventArgs e)
         {
-            CsvDao csvDao = new CsvDao();
+            IBaseDao dao;
             _dataTable = new WorkoutDataTable();
-            _dataTable = csvDao.DeserializeToObject<WorkoutDataTable>("ttt.csv");
 
-            _bindingSource = new BindingSource();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "XML|*.xml|CSV|*.csv",
+                Title = "Select data file"
+            };
 
-            dataGridView.DataSource = _bindingSource.DataSource = _dataTable;
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                switch (openFileDialog.FilterIndex)
+                {
+                    case 1:
+                        dao = new XmlDao();
+                        var result = Dates = dao.DeserializeToObject<List<DateDto>>(openFileDialog.FileName);
+                        SetupDataGridViewTable(result);
+                        break;
 
-            dataGridView.RowHeadersVisible = true;
-            dataGridView.RowHeadersWidth = 100;
+                    case 2:
+                        dao = new CsvDao();
+                        _dataTable = dao.DeserializeToObject<WorkoutDataTable>(openFileDialog.FileName);
+                        _bindingSource = new BindingSource();
+
+                        dataGridView.DataSource = _bindingSource.DataSource = _dataTable;
+
+                        dataGridView.RowHeadersVisible = true;
+                        dataGridView.RowHeadersWidth = 100;
+                        break;
+                }
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -209,17 +226,28 @@ namespace WorkoutTracker.View
 
         private void button6_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewCell oneCell in dataGridView.SelectedCells)
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
-                if (oneCell.Selected)
-                    dataGridView.Rows.RemoveAt(oneCell.RowIndex);
+                if (row.Selected) dataGridView.Rows.Remove(row);
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void buttonManageCategories_Click(object sender, EventArgs e)
         {
             var categoryWindow = new CategoriesAndTypesWindow(ref Categories);
             categoryWindow.ShowDialog();
+            categoryWindow.Dispose();
+            SetupDataGridViewTable(Dates);
+        }
+
+        private void DataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            buttonDelete.Enabled = dataGridView.SelectedRows.Contains(dataGridView.CurrentRow) && !dataGridView.SelectedRows.Contains(dataGridView.Rows[dataGridView.NewRowIndex]);
+        }
+
+        private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Dates = _dataTable.RetrieveDto(dataGridView.Rows, Categories).ToList();
         }
     }
 }
