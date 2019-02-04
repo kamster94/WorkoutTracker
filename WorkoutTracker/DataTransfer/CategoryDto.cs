@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace WorkoutTracker.DataTransfer
 {
     [XmlType("Category")]
-    public class CategoryDto : IBaseDto
+    public class CategoryDto
     {
         [XmlElement("Id")]
         public  int Id { get; set; }

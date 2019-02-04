@@ -3,7 +3,7 @@
 namespace WorkoutTracker.DataTransfer
 {
     [XmlType("Type")]
-    public class TypeDto : IBaseDto
+    public class TypeDto
     {
         [XmlElement("Id")]
         public int Id { get; set; }

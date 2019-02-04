@@ -30,9 +30,7 @@
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonSaveData = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.buttonLoadData = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonManageCategories = new System.Windows.Forms.Button();
@@ -63,16 +61,6 @@
             this.buttonSaveData.UseVisualStyleBackColor = true;
             this.buttonSaveData.Click += new System.EventHandler(this.buttonSaveNumericData_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(588, 309);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "fill table";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // buttonLoadData
             // 
             this.buttonLoadData.Location = new System.Drawing.Point(588, 93);
@@ -82,16 +70,6 @@
             this.buttonLoadData.Text = "Load data";
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(588, 338);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "tab2dto";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tabControl1
             // 
@@ -107,10 +85,8 @@
             this.tabPage1.Controls.Add(this.buttonManageCategories);
             this.tabPage1.Controls.Add(this.buttonDelete);
             this.tabPage1.Controls.Add(this.dataGridView);
-            this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.buttonSaveData);
             this.tabPage1.Controls.Add(this.buttonLoadData);
-            this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -138,7 +114,7 @@
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.button6_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // MainWindow
             // 
@@ -159,9 +135,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonSaveData;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonLoadData;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button buttonDelete;
