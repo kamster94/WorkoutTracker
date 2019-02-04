@@ -8,19 +8,11 @@ namespace WorkoutTracker.DataTransfer
 {
     class WorkoutDataTable : DataTable
     {
-        private readonly string _DateColumnName = "Date";
-
-        public string DateColumnName
-        {
-            get
-            {
-                return _DateColumnName;
-            }
-        }
+        private string DateColumnName { get; } = "Date";
 
         public void FillWithDto(IList<DateDto> dates, IList<CategoryDto> categories)
         {
-            this.Columns.Add(new DataColumn(_DateColumnName, typeof(string)));
+            this.Columns.Add(new DataColumn(DateColumnName, typeof(string)));
             foreach (var category in categories)
             {
                 foreach (var type in category.Types)
@@ -52,7 +44,7 @@ namespace WorkoutTracker.DataTransfer
                 date.Workouts = new List<WorkoutDto>();
                 foreach (DataColumn column in this.Columns)
                 {
-                    if (column.ColumnName == _DateColumnName) continue;
+                    if (column.ColumnName == DateColumnName) continue;
                     var workout = new WorkoutDto();
                     var count = this.Rows[this.Rows.IndexOf(row)].Field<int?>(this.Columns.IndexOf(column));
                     workout.Count = count != null ? (int) count : 0;

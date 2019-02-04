@@ -31,13 +31,13 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonSaveData = new System.Windows.Forms.Button();
             this.buttonLoadData = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPageTable = new System.Windows.Forms.TabPage();
             this.buttonManageCategories = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabPageTable.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -71,29 +71,29 @@
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(677, 393);
-            this.tabControl1.TabIndex = 9;
+            this.tabControl.Controls.Add(this.tabPageTable);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(677, 393);
+            this.tabControl.TabIndex = 9;
             // 
-            // tabPage1
+            // tabPageTable
             // 
-            this.tabPage1.Controls.Add(this.buttonManageCategories);
-            this.tabPage1.Controls.Add(this.buttonDelete);
-            this.tabPage1.Controls.Add(this.dataGridView);
-            this.tabPage1.Controls.Add(this.buttonSaveData);
-            this.tabPage1.Controls.Add(this.buttonLoadData);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(669, 367);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageTable.Controls.Add(this.buttonManageCategories);
+            this.tabPageTable.Controls.Add(this.buttonDelete);
+            this.tabPageTable.Controls.Add(this.dataGridView);
+            this.tabPageTable.Controls.Add(this.buttonSaveData);
+            this.tabPageTable.Controls.Add(this.buttonLoadData);
+            this.tabPageTable.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTable.Name = "tabPageTable";
+            this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTable.Size = new System.Drawing.Size(669, 367);
+            this.tabPageTable.TabIndex = 2;
+            this.tabPageTable.Text = "Data table";
+            this.tabPageTable.UseVisualStyleBackColor = true;
             // 
             // buttonManageCategories
             // 
@@ -108,11 +108,11 @@
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(588, 223);
+            this.buttonDelete.Location = new System.Drawing.Point(588, 309);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 52);
             this.buttonDelete.TabIndex = 9;
-            this.buttonDelete.Text = "delete";
+            this.buttonDelete.Text = "Delete selected rows";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
@@ -121,12 +121,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(701, 417);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.Name = "MainWindow";
-            this.Text = "MainWindow";
+            this.Text = "Workout Tracker";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.tabPageTable.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -136,8 +136,8 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonSaveData;
         private System.Windows.Forms.Button buttonLoadData;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPageTable;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonManageCategories;
     }
