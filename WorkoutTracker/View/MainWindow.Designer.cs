@@ -47,8 +47,9 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(576, 355);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellClicked);
+            this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridView_CellClicked);
             this.dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellValueChanged);
+            this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView_DataError);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.DataGridView_SelectionChanged);
             // 
             // buttonSaveData
@@ -59,7 +60,7 @@
             this.buttonSaveData.TabIndex = 1;
             this.buttonSaveData.Text = "Save data";
             this.buttonSaveData.UseVisualStyleBackColor = true;
-            this.buttonSaveData.Click += new System.EventHandler(this.buttonSaveNumericData_Click);
+            this.buttonSaveData.Click += new System.EventHandler(this.ButtonSaveNumericData_Click);
             // 
             // buttonLoadData
             // 
@@ -69,7 +70,7 @@
             this.buttonLoadData.TabIndex = 7;
             this.buttonLoadData.Text = "Load data";
             this.buttonLoadData.UseVisualStyleBackColor = true;
-            this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
+            this.buttonLoadData.Click += new System.EventHandler(this.ButtonLoadData_Click);
             // 
             // tabControl
             // 
@@ -103,7 +104,7 @@
             this.buttonManageCategories.TabIndex = 10;
             this.buttonManageCategories.Text = "Manage categories and types";
             this.buttonManageCategories.UseVisualStyleBackColor = true;
-            this.buttonManageCategories.Click += new System.EventHandler(this.buttonManageCategories_Click);
+            this.buttonManageCategories.Click += new System.EventHandler(this.ButtonManageCategories_Click);
             // 
             // buttonDelete
             // 
@@ -114,7 +115,7 @@
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "Delete selected rows";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // MainWindow
             // 

@@ -175,6 +175,10 @@ namespace WorkoutTracker.View
                 datePickerDialog.ShowDialog();
                 userEnteredDate = datePickerDialog.dateTimePicker.Value;
                 datePickerDialog.Dispose();
+                for (int i= 0; i < _dataGridView.ColumnCount; i++)
+                {
+                    _dataGridView[i, e.RowIndex].Value = 0;
+                }
                 _dataGridView[0, e.RowIndex].Value = userEnteredDate.ToShortDateString();
                 _bindingSource.EndEdit();
                 _dataGridView.NotifyCurrentCellDirty(true);
@@ -193,8 +197,10 @@ namespace WorkoutTracker.View
                 FillDataTable();
             }
 
-            internal void UpdateDatesFromDataTable()
+            internal void UpdateDatesFromDataTable(DataGridViewCellEventArgs e)
             {
+                if (_dataGridView[e.ColumnIndex, e.RowIndex].Value == null)
+                    _dataGridView[e.ColumnIndex, e.RowIndex].Value = 0;
                 _dates = _dataTable.RetrieveDto(_dataGridView.Rows, _categories).ToList();
             }
 

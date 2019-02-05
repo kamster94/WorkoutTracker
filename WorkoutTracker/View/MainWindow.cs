@@ -13,18 +13,18 @@ namespace WorkoutTracker.View
             _controller = new Controller(this);
         }
 
-        private void buttonSaveNumericData_Click(object sender, EventArgs e)
+        private void ButtonSaveNumericData_Click(object sender, EventArgs e)
         {
             _controller.SaveDataToFile();
             
         }
 
-        private void buttonLoadData_Click(object sender, EventArgs e)
+        private void ButtonLoadData_Click(object sender, EventArgs e)
         {
             _controller.LoadDataFromFile();
         }
 
-        private void dataGridView_CellClicked(object sender, DataGridViewCellCancelEventArgs e)
+        private void DataGridView_CellClicked(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (e.RowIndex == dataGridView.NewRowIndex)
             {
@@ -32,7 +32,7 @@ namespace WorkoutTracker.View
             } 
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
@@ -40,7 +40,7 @@ namespace WorkoutTracker.View
             }
         }
 
-        private void buttonManageCategories_Click(object sender, EventArgs e)
+        private void ButtonManageCategories_Click(object sender, EventArgs e)
         {
             _controller.ShowCategoriesEditWindow();
         }
@@ -52,12 +52,17 @@ namespace WorkoutTracker.View
 
         private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            _controller.UpdateDatesFromDataTable();
+            _controller.UpdateDatesFromDataTable(e);
         }
 
         public void UpdateCategoriesReference(object categories)
         {
             _controller.DoUpdateReferenes(categories);
+        }
+
+        private void DataGridView_DataError(object sender, DataGridViewDataErrorEventArgs anError)
+        {
+            MessageBox.Show("Error, invalid data format.");
         }
     }
 }
