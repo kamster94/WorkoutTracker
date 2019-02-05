@@ -20,13 +20,13 @@ namespace WorkoutTracker.View
 
             private readonly MainWindow _mainWindow;
 
-            internal Controller(CategoriesAndTypesWindow parent, List<CategoryDto> categories, MainWindow mainWindow)
+            internal Controller(CategoriesAndTypesWindow parent, object categories, MainWindow mainWindow)
             {
                 _parent = parent;
                 _mainWindow = mainWindow;
                 _comboBoxCategories = _parent.comboBoxCategories;
                 _comboBoxTypes = _parent.comboBoxTypes;
-                _categories = categories;
+                _categories = (List<CategoryDto>)categories;
             }
 
             internal void RefreshCategoriesAndTypes()

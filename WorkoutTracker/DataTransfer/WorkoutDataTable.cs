@@ -8,7 +8,7 @@ namespace WorkoutTracker.DataTransfer
 {
     class WorkoutDataTable : DataTable
     {
-        private string DateColumnName { get; } = "Date";
+        public string DateColumnName { get; } = "Date";
 
         public void FillWithDto(IList<DateDto> dates, IList<CategoryDto> categories)
         {

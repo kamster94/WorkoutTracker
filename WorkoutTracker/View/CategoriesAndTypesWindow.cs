@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using WorkoutTracker.DataTransfer;
 
 namespace WorkoutTracker.View
 {
     public partial class CategoriesAndTypesWindow : Form
     {
-        private Controller _controller;
+        private readonly Controller _controller;
 
-        public CategoriesAndTypesWindow(List<CategoryDto> categories, MainWindow mainWindow)
+        public CategoriesAndTypesWindow(object categories, MainWindow mainWindow)
         {
             InitializeComponent();
             _controller = new Controller(this, categories, mainWindow);
             _controller.RefreshCategoriesAndTypes();
         }
 
-        private void ComboBoxCategories_SelectedIndexChanged(object sender,
-            System.EventArgs e)
+        private void ComboBoxCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
             _controller.CategoriesIndexChanged();
         }

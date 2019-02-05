@@ -29,13 +29,15 @@ namespace WorkoutTracker.View
                 _categories = new List<CategoryDto>();
                 _dates = new List<DateDto>();
                 _dataGridView = _parent.dataGridView;
+                EraseDataTable();
             }
 
             internal void FillDataTable()
             {
                 foreach (var date in _dates)
                 {
-                    date.Workouts = date.Workouts.OrderBy(x => x.CategoryId).ThenBy(x => x.TypeId).ToList();
+                    date.Workouts = date.Workouts.OrderBy(x => _categories.Find(y => y.Id == x.CategoryId).Order)
+                        .ThenBy(x => _categories.Find(y => y.Id == x.CategoryId).Types.Find(a => a.Id == x.TypeId).Order).ToList();
                 }
                 _dataTable = new WorkoutDataTable();
                 _dataTable.FillWithDto(_dates, _categories);
@@ -61,6 +63,47 @@ namespace WorkoutTracker.View
                 _parent.dataGridView.DataSource = null;
                 _dataTable = new WorkoutDataTable();
                 _bindingSource = new BindingSource();
+            }
+
+            internal void TryUpdateDates()
+            {
+                foreach (var date in _dates)
+                {
+                    foreach (var category in _categories)
+                    {
+                        foreach (var type in category.Types)
+                        {
+                            var check = date.Workouts.Find(x => x.CategoryId == category.Id && x.TypeId == type.Id);
+                            if (check == null)
+                            {
+                                date.Workouts.Add(new WorkoutDto
+                                {
+                                    CategoryId = category.Id,
+                                    TypeId = type.Id,
+                                    Count = 0
+                                });
+                            }
+                        }
+                    }
+
+                    foreach (var workout in date.Workouts.ToList())
+                    {
+                        var check = _categories.Find(x => x.Id == workout.CategoryId);
+                        if (check == null)
+                        {
+                            date.Workouts.Remove(workout);
+                        }
+
+                        foreach (var category in _categories)
+                        {
+                            var check2 = category.Types.Find(x => x.Id == workout.TypeId);
+                            if (category.Id == workout.CategoryId && check2 == null)
+                            {
+                                date.Workouts.Remove(workout);
+                            }
+                        }
+                    }
+                }
             }
 
             internal void SaveDataToFile()
@@ -146,17 +189,18 @@ namespace WorkoutTracker.View
                 categoryWindow.ShowDialog();
                 categoryWindow.Dispose();
                 EraseDataTable();
+                TryUpdateDates();
                 FillDataTable();
             }
 
-            internal void UpdateDataTable()
+            internal void UpdateDatesFromDataTable()
             {
                 _dates = _dataTable.RetrieveDto(_dataGridView.Rows, _categories).ToList();
             }
 
-            internal void DoUpdateReferenes(List<CategoryDto> categories)
+            internal void DoUpdateReferenes(object categories)
             {
-                _categories = categories;
+                _categories = (List<CategoryDto>)categories;
             }
         }
     }

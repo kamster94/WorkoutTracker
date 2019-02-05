@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using WorkoutTracker.DataTransfer;
 
 namespace WorkoutTracker.View
 {
@@ -54,10 +52,10 @@ namespace WorkoutTracker.View
 
         private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            _controller.UpdateDataTable();
+            _controller.UpdateDatesFromDataTable();
         }
 
-        public void UpdateCategoriesReference(List<CategoryDto> categories)
+        public void UpdateCategoriesReference(object categories)
         {
             _controller.DoUpdateReferenes(categories);
         }
