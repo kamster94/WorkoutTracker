@@ -56,8 +56,8 @@ namespace WorkoutTracker.DataTransfer
                     }
                     catch (NullReferenceException e)
                     {
-                        Console.WriteLine(e);
-                        throw;
+                        MessageBox.Show($"Error, invalid category or type {column.ColumnName}");
+                        return null;
                     }
                     date.Workouts.Add(workout);
                 }

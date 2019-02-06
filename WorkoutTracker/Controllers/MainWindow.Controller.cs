@@ -32,6 +32,27 @@ namespace WorkoutTracker.View
                 EraseDataTable();
             }
 
+            internal bool IsDataCorrect()
+            {
+                foreach (var date in _dates)
+                {
+                    foreach (var workout in date.Workouts)
+                    {
+                        try
+                        {
+                            _categories.Find(x => x.Id == workout.CategoryId).Types.Find(y => y.Id == workout.TypeId).ToString();
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            MessageBox.Show($"Error, invalid category {workout.CategoryId} or type {workout.TypeId}");
+                            _dates = new List<DateDto>();
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
             internal void FillDataTable()
             {
                 foreach (var date in _dates)
@@ -151,18 +172,26 @@ namespace WorkoutTracker.View
                             dao = new XmlDao();
                             _dates = dao.DeserializeToObject<List<DateDto>>(openFileDialog.FileName);
                             EraseDataTable();
-                            FillDataTable();
+                            if (IsDataCorrect())
+                            {
+                                FillDataTable();
+                            }
                             break;
 
                         case 2:
                             dao = new CsvDao();
                             _dataTable = dao.DeserializeToObject<WorkoutDataTable>(openFileDialog.FileName);
                             _bindingSource = new BindingSource();
-
-                            _parent.dataGridView.DataSource = _bindingSource.DataSource = _dataTable;
-
-                            _dataGridView.RowHeadersVisible = true;
-                            _dataGridView.RowHeadersWidth = 100;
+                            _dates = new List<DateDto>();
+                            UpdateDatesFromDataTable();
+                            if (_dates.Count != 0)
+                            {
+                                _parent.dataGridView.DataSource = _bindingSource.DataSource = _dataTable;
+                                _dataGridView.RowHeadersVisible = true;
+                                _dataGridView.RowHeadersWidth = 100;
+                            }
+                            else _dates = new List<DateDto>();
+                            
                             break;
                     }
                 }
@@ -193,15 +222,24 @@ namespace WorkoutTracker.View
                 categoryWindow.ShowDialog();
                 categoryWindow.Dispose();
                 EraseDataTable();
-                TryUpdateDates();
-                FillDataTable();
+                if (IsDataCorrect())
+                {
+                    TryUpdateDates();
+                    FillDataTable();
+                }
             }
 
-            internal void UpdateDatesFromDataTable(DataGridViewCellEventArgs e)
+            internal void UpdateDatesFromDataTable()
             {
-                if (_dataGridView[e.ColumnIndex, e.RowIndex].Value == null)
-                    _dataGridView[e.ColumnIndex, e.RowIndex].Value = 0;
-                _dates = _dataTable.RetrieveDto(_dataGridView.Rows, _categories).ToList();
+                try
+                {
+                    _dates = _dataTable.RetrieveDto(_dataGridView.Rows, _categories).ToList();
+                }
+                catch (Exception e)
+                {
+
+                }
+                
             }
 
             internal void DoUpdateReferenes(object categories)

@@ -155,7 +155,7 @@ namespace WorkoutTracker.View
 
                     if (order > _categories[_comboBoxCategories.SelectedIndex].Types[_comboBoxTypes.SelectedIndex].Order)
                     {
-                        for (int i = _categories[_comboBoxCategories.SelectedIndex].Types[_comboBoxTypes.SelectedIndex].Order - 1; i <= order - 1; i++)
+                        for (int i = _categories[_comboBoxCategories.SelectedIndex].Types[_comboBoxTypes.SelectedIndex].Order; i <= order - 1; i++)
                         {
                             _categories[_comboBoxCategories.SelectedIndex].Types[i].Order--;
                         }
@@ -163,7 +163,7 @@ namespace WorkoutTracker.View
 
                     else if (order < _categories[_comboBoxCategories.SelectedIndex].Types[_comboBoxTypes.SelectedIndex].Order)
                     {
-                        for (int i = order - 1; i < _categories[_comboBoxCategories.SelectedIndex].Types[_comboBoxTypes.SelectedIndex].Order - 1; i++)
+                        for (int i = order - 1; i <= _categories[_comboBoxCategories.SelectedIndex].Types[_comboBoxTypes.SelectedIndex].Order - 1; i++)
                         {
                             _categories[_comboBoxCategories.SelectedIndex].Types[i].Order++;
                         }

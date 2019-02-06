@@ -52,7 +52,7 @@ namespace WorkoutTracker.View
 
         private void DataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            _controller.UpdateDatesFromDataTable(e);
+            _controller.UpdateDatesFromDataTable();
         }
 
         public void UpdateCategoriesReference(object categories)
