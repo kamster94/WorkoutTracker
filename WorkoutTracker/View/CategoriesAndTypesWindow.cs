@@ -7,10 +7,10 @@ namespace WorkoutTracker.View
     {
         private readonly Controller _controller;
 
-        public CategoriesAndTypesWindow(object categories, MainWindow mainWindow)
+        public CategoriesAndTypesWindow(object categories)
         {
             InitializeComponent();
-            _controller = new Controller(this, categories, mainWindow);
+            _controller = new Controller(this, categories);
             _controller.RefreshCategoriesAndTypes();
         }
 
@@ -47,17 +47,6 @@ namespace WorkoutTracker.View
         private void buttonTypeDelete_Click(object sender, EventArgs e)
         {
             _controller.DeleteType();
-        }
-
-        private void buttonSaveCategories_Click(object sender, EventArgs e)
-        {
-            _controller.SaveToFile();
-        }
-
-        private void buttonLoadCategories_Click(object sender, EventArgs e)
-        {
-            _controller.LoadFromFile();
-            _controller.RefreshCategoriesAndTypes();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)

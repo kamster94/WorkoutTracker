@@ -39,8 +39,6 @@
             this.buttonTypeEdit = new System.Windows.Forms.Button();
             this.buttonTypeAdd = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonSaveCategories = new System.Windows.Forms.Button();
-            this.buttonLoadCategories = new System.Windows.Forms.Button();
             this.groupBoxCategory.SuspendLayout();
             this.groupBoxType.SuspendLayout();
             this.SuspendLayout();
@@ -160,33 +158,11 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // buttonSaveCategories
-            // 
-            this.buttonSaveCategories.Location = new System.Drawing.Point(13, 131);
-            this.buttonSaveCategories.Name = "buttonSaveCategories";
-            this.buttonSaveCategories.Size = new System.Drawing.Size(93, 23);
-            this.buttonSaveCategories.TabIndex = 6;
-            this.buttonSaveCategories.Text = "Save to file";
-            this.buttonSaveCategories.UseVisualStyleBackColor = true;
-            this.buttonSaveCategories.Click += new System.EventHandler(this.buttonSaveCategories_Click);
-            // 
-            // buttonLoadCategories
-            // 
-            this.buttonLoadCategories.Location = new System.Drawing.Point(112, 131);
-            this.buttonLoadCategories.Name = "buttonLoadCategories";
-            this.buttonLoadCategories.Size = new System.Drawing.Size(93, 23);
-            this.buttonLoadCategories.TabIndex = 7;
-            this.buttonLoadCategories.Text = "Load from file";
-            this.buttonLoadCategories.UseVisualStyleBackColor = true;
-            this.buttonLoadCategories.Click += new System.EventHandler(this.buttonLoadCategories_Click);
-            // 
             // CategoriesAndTypesWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 163);
-            this.Controls.Add(this.buttonLoadCategories);
-            this.Controls.Add(this.buttonSaveCategories);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.groupBoxType);
             this.Controls.Add(this.groupBoxCategory);
@@ -214,7 +190,5 @@
         private System.Windows.Forms.Button buttonTypeEdit;
         private System.Windows.Forms.Button buttonTypeAdd;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Button buttonSaveCategories;
-        private System.Windows.Forms.Button buttonLoadCategories;
     }
 }

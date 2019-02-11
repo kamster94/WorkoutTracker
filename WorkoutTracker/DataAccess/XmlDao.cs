@@ -22,7 +22,7 @@ namespace WorkoutTracker.DataAccess
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                return default;
             }
         }
 

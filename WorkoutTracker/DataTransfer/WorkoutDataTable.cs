@@ -8,8 +8,10 @@ namespace WorkoutTracker.DataTransfer
 {
     class WorkoutDataTable : DataTable
     {
+        //Nazwa kolumny z datą
         public string DateColumnName { get; } = "Date";
 
+        //Metoda do populowania tabeli danymi z DTO
         public void FillWithDto(IList<DateDto> dates, IList<CategoryDto> categories)
         {
             this.Columns.Add(new DataColumn(DateColumnName, typeof(string)));
@@ -34,6 +36,7 @@ namespace WorkoutTracker.DataTransfer
             }
         }
 
+        //Metoda zwracająca DTO ćwiczeń z danych z tabeli
         public IList<DateDto> RetrieveDto(DataGridViewRowCollection gridRows, IList<CategoryDto> categories)
         {
             var dates = new List<DateDto>();
@@ -54,6 +57,7 @@ namespace WorkoutTracker.DataTransfer
                         workout.TypeId = categories.FirstOrDefault(x => x.Id == workout.CategoryId).Types
                             .FirstOrDefault(x => x.Name == column.ColumnName).Id;
                     }
+                    //Obsługa wyjątku kiedy kategoria lub typ zostały usunięte
                     catch (NullReferenceException e)
                     {
                         MessageBox.Show($"Error, invalid category or type {column.ColumnName}");

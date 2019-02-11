@@ -23,13 +23,18 @@ namespace WorkoutTracker.View
 
             private DataGridView _dataGridView;
 
+            private readonly DataGridViewColumnSelector _columnSelector;
+
             internal Controller(MainWindow parent)
             {
                 _parent = parent;
                 _categories = new List<CategoryDto>();
                 _dates = new List<DateDto>();
                 _dataGridView = _parent.dataGridView;
+                _dataTable = new WorkoutDataTable();
+                _columnSelector = new DataGridViewColumnSelector(_dataTable.DateColumnName, _parent.dataGridView);
                 EraseDataTable();
+                LoadCategoriesFromFile();
             }
 
             internal bool IsDataCorrect()
@@ -67,6 +72,11 @@ namespace WorkoutTracker.View
 
                 _dataGridView.DataSource = _bindingSource.DataSource = _dataTable;
 
+                SetRowHeaders();
+            }
+
+            internal void SetRowHeaders()
+            {
                 _dataGridView.RowHeadersVisible = true;
                 _dataGridView.RowHeadersWidth = 100;
 
@@ -218,7 +228,7 @@ namespace WorkoutTracker.View
 
             internal void ShowCategoriesEditWindow()
             {
-                var categoryWindow = new CategoriesAndTypesWindow(_categories, _parent);
+                var categoryWindow = new CategoriesAndTypesWindow(_categories);
                 categoryWindow.ShowDialog();
                 categoryWindow.Dispose();
                 EraseDataTable();
@@ -239,12 +249,20 @@ namespace WorkoutTracker.View
                 {
 
                 }
-                
             }
 
-            internal void DoUpdateReferenes(object categories)
+            internal void SaveCategoriesToFile()
             {
-                _categories = (List<CategoryDto>)categories;
+                XmlDao dao = new XmlDao();
+                dao.SerializeToFile("categories.xml", _categories);
+            }
+
+            internal void LoadCategoriesFromFile()
+            {
+                XmlDao dao = new XmlDao();
+                _categories = dao.DeserializeToObject<List<CategoryDto>>("categories.xml");
+                if (_categories != null) FillDataTable();
+                else _categories = new List<CategoryDto>();
             }
         }
     }

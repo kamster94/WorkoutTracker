@@ -66,6 +66,9 @@
     <Compile Include="Controllers\CategoriesAndTypesWindow.Controller.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Controllers\MainWindow.ColumnSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controllers\MainWindow.Controller.cs">
       <SubType>Form</SubType>
     </Compile>

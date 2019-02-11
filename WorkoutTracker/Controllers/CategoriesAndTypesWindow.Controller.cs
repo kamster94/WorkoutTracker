@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using WorkoutTracker.DataAccess;
 using WorkoutTracker.DataTransfer;
 
 namespace WorkoutTracker.View
@@ -18,12 +17,9 @@ namespace WorkoutTracker.View
 
             private List<CategoryDto> _categories;
 
-            private readonly MainWindow _mainWindow;
-
-            internal Controller(CategoriesAndTypesWindow parent, object categories, MainWindow mainWindow)
+            internal Controller(CategoriesAndTypesWindow parent, object categories)
             {
                 _parent = parent;
-                _mainWindow = mainWindow;
                 _comboBoxCategories = _parent.comboBoxCategories;
                 _comboBoxTypes = _parent.comboBoxTypes;
                 _categories = (List<CategoryDto>)categories;
@@ -193,38 +189,6 @@ namespace WorkoutTracker.View
 
                         RefreshCategoriesAndTypes();
                     }
-                }
-            }
-
-            internal void SaveToFile()
-            {
-                XmlDao dao = new XmlDao();
-                var saveFileDialog = new SaveFileDialog
-                {
-                    Filter = "XML|*.xml",
-                    Title = "Save categories and types"
-                };
-                saveFileDialog.ShowDialog();
-                if (saveFileDialog.FileName != "")
-                {
-                    dao.SerializeToFile(saveFileDialog.FileName, _categories);
-                }
-            }
-
-            internal void LoadFromFile()
-            {
-                XmlDao dao = new XmlDao();
-
-                OpenFileDialog openFileDialog = new OpenFileDialog
-                {
-                    Filter = "XML|*.xml",
-                    Title = "Select categories and types file"
-                };
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    _categories = dao.DeserializeToObject<List<CategoryDto>>(openFileDialog.FileName);
-                    _mainWindow.UpdateCategoriesReference(_categories);
                 }
             }
         }

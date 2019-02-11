@@ -11,12 +11,6 @@ namespace WorkoutTracker.DataTransfer
         [XmlElement("CategoryId")]
         public int CategoryId { get; set; }
 
-        [XmlElement("TypeOrder")]
-        public int TypeOrder { get; set; }
-
-        [XmlElement("CategoryOrder")]
-        public int CategoryOrder { get; set; }
-
         [XmlElement("Count")]
         public int Count { get; set; }
     }

@@ -5,12 +5,13 @@ namespace WorkoutTracker.View
 {
     public partial class MainWindow : Form
     {
-        private Controller _controller;
+        private readonly Controller _controller;
 
         public MainWindow()
         {
             InitializeComponent();
             _controller = new Controller(this);
+            
         }
 
         private void ButtonSaveNumericData_Click(object sender, EventArgs e)
@@ -55,14 +56,19 @@ namespace WorkoutTracker.View
             _controller.UpdateDatesFromDataTable();
         }
 
-        public void UpdateCategoriesReference(object categories)
-        {
-            _controller.DoUpdateReferenes(categories);
-        }
-
         private void DataGridView_DataError(object sender, DataGridViewDataErrorEventArgs anError)
         {
             MessageBox.Show("Error, invalid data format.");
+        }
+
+        private void Form_Closing(object sender, FormClosingEventArgs e)
+        {
+            _controller.SaveCategoriesToFile();
+        }
+
+        private void DataGridView_Sorted(object sender, EventArgs e)
+        {
+            _controller.SetRowHeaders();
         }
     }
 }

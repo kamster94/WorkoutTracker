@@ -51,6 +51,7 @@
             this.dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellValueChanged);
             this.dataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView_DataError);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.DataGridView_SelectionChanged);
+            this.dataGridView.Sorted += new System.EventHandler(this.DataGridView_Sorted);
             // 
             // buttonSaveData
             // 
@@ -125,6 +126,7 @@
             this.Controls.Add(this.tabControl);
             this.Name = "MainWindow";
             this.Text = "Workout Tracker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Closing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPageTable.ResumeLayout(false);
